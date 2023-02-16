@@ -1,6 +1,7 @@
+
 // event listeners 
 
-let button = document.getElementsByClassName('gameboard--button'); 
+let buttons = document.querySelectorAll('.gameboard--button'); 
 let button1 = document.getElementById('0'); 
 let button2 = document.getElementById('1'); 
 let button3 = document.getElementById('2'); 
@@ -12,59 +13,95 @@ let button8 = document.getElementById('7');
 let button9 = document.getElementById('8'); 
 
 
-// module structure
-let gameBoard = (() => {
-    let board = ['', '', '', '', '', '', '', '', '']; 
-    button1.innerHTML = board[0]; 
-    button2.innerHTML = board[1]; 
-    button3.innerHTML = board[2]; 
-    button4.innerHTML = board[3]; 
-    button5.innerHTML = board[4]; 
-    button6.innerHTML = board[5]; 
-    button7.innerHTML = board[6]; 
-    button8.innerHTML = board[7]; 
-    button9.innerHTML = board[8]; 
+
+function Gameboard() {
+
+    let board = [['', '', ''], ['', '', ''], ['', '', '']]; 
+
+    const getBoard = () => board; 
+
+    const printBoard = () => {
+        button1.innerHTML = board[0][0]; 
+        button2.innerHTML = board[0][1]; 
+        button3.innerHTML = board[0][2]; 
+        button4.innerHTML = board[1][0]; 
+        button5.innerHTML = board[1][1];
+        button6.innerHTML = board[1][2];
+        button7.innerHTML = board[2][0];
+        button8.innerHTML = board[2][1];
+        button9.innerHTML = board[2][2];
+    }  
     
-    resetBoard = function() {
-    board = ['', '', '', '', '', '', '', '', '']; 
+    const resetBoard = () => {
+        board = [['', '', ''], ['', '', ''], ['', '', '']]; 
     };
 
-    return { board, resetBoard }; 
-})();
+    return { getBoard, printBoard, resetBoard }; 
 
-
-const player = (name, symbol) => {
-    const getName = name; 
-    const getSymbol = symbol; 
-    return { getName, getSymbol }; 
-}
-
-function roundTracker() {
-    addRound = () => { 
-        let i = 0; 
-        i++; 
-        console.log(i);
-    }
-
-    resetRound = function() {
-        i = 0; 
-    }
-
-    return { addRound, resetRound }
 };
 
-console.log()
+function Move() {
+
+    const board = Gameboard(); 
+
+    const updateGameState = (row, col, value) => {
+        board.getBoard()[row][col] = value; 
+        console.log(board.getBoard()); 
+    }
+
+    const userInput = () => {
+        buttons.forEach(button => {
+            let row = button.dataset.row; 
+            let col = button.dataset.col;  
+
+            button.addEventListener('click', () => {
+                let value = 'X'; 
+                updateGameState(row, col, value); 
+
+               board.printBoard();
+            });
+        });
+    };
+   
+    return {userInput}
+}
+
+const move = new Move(); 
+move.userInput(); 
 
 
+function gameController(name1, name2) {
+   let playerOneName = name1; 
+   let playerTwoName = name2; 
 
-//blank game board
+    const board = Gameboard(); 
+    
+    const players = [
+        {   
+            name: playerOneName, 
+            symbol: 'X'
+        }, 
+        {
+            name: playerTwoName, 
+            symbol: 'O'
+        }
+    ];
 
-//detect turn
+    let activePlayer = players[0]; 
 
-//detect click event 
+    const switchPlayer = () => {
+        activePlayer = activePlayer === players[0] ? players[1] : players [0]; 
+    }; 
 
-//enter click event to board
+    const getActivePlayer = () => activePlayer; 
 
-//render to window 
+    const printNewRound = () => {
+        board.printBoard(); 
+    }
 
-//check if board meets a win condition
+    const playRound = () => {
+        // obtain 
+    }
+
+    return { switchPlayer, getActivePlayer, printNewRound, playRound }
+}

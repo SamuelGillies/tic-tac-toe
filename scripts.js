@@ -87,6 +87,40 @@ function Move() {
         }
     }
 
+    const GameOver = () => {
+        const xWin = {
+            es1: [['X', '', ''], ['X', '', ''], ['X', '', '']],
+            es2: [['', 'X', ''], ['', 'X', ''], ['', 'X', '']], 
+            es3: [['', '', 'X'], ['', '', 'X'], ['', '', 'X']],  
+            es4: [['X', 'X', 'X'], ['', '', ''], ['', '', '']],
+            es5: [['', '', ''], ['X', 'X', 'X'], ['', '', '']], 
+            es6: [['', '', ''], ['', '', ''], ['X', 'X', 'X']],  
+            es7: [['X', '', ''], ['', 'X', ''], ['', '', 'X']],
+            es8: [['', '', 'X'], ['', 'X', ''], ['X', '', '']], 
+        } 
+
+        const oWin = {
+            es1: [['O', '', ''], ['O', '', ''], ['O', '', '']],
+            es2: [['', 'O', ''], ['', 'O', ''], ['', 'O', '']], 
+            es3: [['', '', 'O'], ['', '', 'O'], ['', '', 'O']],  
+            es4: [['O', 'O', 'O'], ['', '', ''], ['', '', '']],
+            es5: [['', '', ''], ['O', 'O', 'O'], ['', '', '']], 
+            es6: [['', '', ''], ['', '', ''], ['O', 'O', 'O']],  
+            es7: [['O', '', ''], ['', 'O', ''], ['', '', 'O']],
+            es8: [['', '', 'O'], ['', 'O', ''], ['O', '', '']], 
+        } 
+
+        const gameOverCheck = () => {
+            if (board.getBoard() == xWin.es1) {
+                console.log('X WINS'); 
+                } else if (board.getBoard() == oWin) {
+                console.log('O WINS'); 
+                };
+            };
+
+        gameOverCheck();
+    }
+
     const userInput = () => {
         buttons.forEach(button => {
             let row = button.dataset.row; 
@@ -96,6 +130,7 @@ function Move() {
                 let symbol = controller.getActivePlayer().symbol; 
                 updateGameState(row, col, symbol); 
                 board.printBoard();
+                GameOver(); 
                 controller.switchPlayer(); 
             });
         });
@@ -106,4 +141,3 @@ function Move() {
 
 const move = new Move(); 
 move.userInput(); 
-

@@ -40,37 +40,8 @@ function Gameboard() {
 
 };
 
-function Move() {
 
-    const board = Gameboard(); 
-
-    const updateGameState = (row, col, value) => {
-        board.getBoard()[row][col] = value; 
-        console.log(board.getBoard()); 
-    }
-
-    const userInput = () => {
-        buttons.forEach(button => {
-            let row = button.dataset.row; 
-            let col = button.dataset.col;  
-
-            button.addEventListener('click', () => {
-                let value = 'X'; 
-                updateGameState(row, col, value); 
-
-               board.printBoard();
-            });
-        });
-    };
-   
-    return {userInput}
-}
-
-const move = new Move(); 
-move.userInput(); 
-
-
-function gameController(name1, name2) {
+function Controller(name1, name2) {
    let playerOneName = name1; 
    let playerTwoName = name2; 
 
@@ -105,3 +76,36 @@ function gameController(name1, name2) {
 
     return { switchPlayer, getActivePlayer, printNewRound, playRound }
 }
+
+
+function Move() {
+
+    const board = Gameboard(); 
+    const controller = Controller('Player 1', 'Player 2'); 
+    let symbol = controller.getActivePlayer().symbol; 
+
+    const updateGameState = (row, col, symbol) => {
+        board.getBoard()[row][col] = symbol; 
+        console.log(board.getBoard()); 
+    }
+
+    const userInput = () => {
+        buttons.forEach(button => {
+            let row = button.dataset.row; 
+            let col = button.dataset.col;  
+
+            button.addEventListener('click', () => {
+                let symbol = controller.getActivePlayer().symbol; 
+                updateGameState(row, col, symbol); 
+                board.printBoard();
+                controller.switchPlayer(); 
+            });
+        });
+    };
+   
+    return { userInput }
+}
+
+const move = new Move(); 
+move.userInput(); 
+

@@ -12,8 +12,6 @@ let button7 = document.getElementById('6');
 let button8 = document.getElementById('7'); 
 let button9 = document.getElementById('8'); 
 
-
-
 function Gameboard() {
 
     let board = [['', '', ''], ['', '', ''], ['', '', '']]; 
@@ -36,10 +34,13 @@ function Gameboard() {
         board = [['', '', ''], ['', '', ''], ['', '', '']]; 
     };
 
-    return { getBoard, printBoard, resetBoard }; 
+    return { 
+        getBoard, 
+        printBoard, 
+        resetBoard 
+    }; 
 
 };
-
 
 function Controller(name1, name2) {
    let playerOneName = name1; 
@@ -70,23 +71,20 @@ function Controller(name1, name2) {
         board.printBoard(); 
     }
 
-    const playRound = () => {
-        // obtain 
-    }
-
-    return { switchPlayer, getActivePlayer, printNewRound, playRound }
+    return { switchPlayer, getActivePlayer, printNewRound }
 }
-
 
 function Move() {
 
     const board = Gameboard(); 
     const controller = Controller('Player 1', 'Player 2'); 
-    let symbol = controller.getActivePlayer().symbol; 
 
     const updateGameState = (row, col, symbol) => {
-        board.getBoard()[row][col] = symbol; 
-        console.log(board.getBoard()); 
+        if ( board.getBoard()[row][col] == '') {
+            board.getBoard()[row][col] = symbol; 
+        } else if ((board.getBoard()[row][col] == 'X')||(board.getBoard()[row][col] == 'O')){
+            board.getBoard()[row][col] == board.getBoard()[row][col];
+        }
     }
 
     const userInput = () => {

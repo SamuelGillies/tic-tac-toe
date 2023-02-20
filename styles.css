@@ -60,5 +60,40 @@
   height: 20vh; 
   width: 20vh; 
   font-size: 4rem;
+  border-radius: 0px;
+  background-color: white;
+  border: 0pt solid black;   
 }
 
+#box--0 {
+  border-right: 1pt solid black;
+}
+
+#box--2 {
+  border-left: 1pt solid black;
+}
+
+#box--3 {
+  border-right: 1pt solid black;
+  border-top: 1pt solid black;
+  border-bottom: 1pt solid black;
+}
+
+#box--4 {
+  border-top: 1pt solid black;
+  border-bottom: 1pt solid black;
+}
+
+#box--5 {
+  border-left: 1pt solid black;
+  border-top: 1pt solid black;
+  border-bottom: 1pt solid black;
+}
+
+#box--6 {
+  border-right: 1pt solid black;
+}
+
+#box--8 {
+  border-left: 1pt solid black;
+}

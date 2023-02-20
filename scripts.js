@@ -98,9 +98,14 @@ function Move() {
                 ((board.getBoard()[2][0] === `${input}`) && (board.getBoard()[2][1] === `${input}`) && (board.getBoard()[2][2] === `${input}`)) || 
                 ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[2][2] === `${input}`)) || 
                 ((board.getBoard()[0][2] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[2][0] === `${input}`))
-                ) {
+                )   {
                     console.log(`${input} WINS`); 
-                } 
+                    } 
+                else if (((board.getBoard()[0].includes('')) === false) && ((board.getBoard()[1].includes('')) === false) && ((board.getBoard()[2].includes('')) === false)) 
+                    {
+                        console.log(`DRAW`);
+                    };
+                
             };
 
         gameOverCheck();

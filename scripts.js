@@ -12,6 +12,8 @@ let button7 = document.getElementById('6');
 let button8 = document.getElementById('7'); 
 let button9 = document.getElementById('8'); 
 let info = document.getElementById('info');
+let reset = document.getElementById('reset');
+
 
 function Gameboard() {
 
@@ -33,6 +35,8 @@ function Gameboard() {
     
     const resetBoard = () => {
         board = [['', '', ''], ['', '', ''], ['', '', '']]; 
+        printBoard(); 
+        info.innerHTML = ''; 
     };
 
     return { 
@@ -100,16 +104,15 @@ function Move() {
                 ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[2][2] === `${input}`)) || 
                 ((board.getBoard()[0][2] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[2][0] === `${input}`))
                 )   {
-                    let winner = `${input} WINS`; 
-                    info.innerHTML = winner; 
-                    console.log(winner); 
+                        let winner = `${input} WINS`; 
+                        info.innerHTML = winner; 
                     } 
                 else if (((board.getBoard()[0].includes('')) === false) && ((board.getBoard()[1].includes('')) === false) && ((board.getBoard()[2].includes('')) === false)) 
                     {
                         let winner = `DRAW`; 
                         info.innerHTML = winner; 
-                        console.log(winner);
-                    } else {
+                    } 
+                else {
                         let winner = `Game in progress...`; 
                         info.innerHTML = winner; 
                     };                
@@ -132,9 +135,16 @@ function Move() {
             });
         });
     };
+
+    const userReset = () => {
+        reset.addEventListener('click', () => {
+            board.resetBoard(); 
+        }); 
+    }
    
-    return { userInput }
+    return { userInput, userReset }
 }
 
 const move = new Move(); 
 move.userInput(); 
+move.userReset(); 

@@ -107,9 +107,12 @@ function Move() {
                 else if (((board.getBoard()[0].includes('')) === false) && ((board.getBoard()[1].includes('')) === false) && ((board.getBoard()[2].includes('')) === false)) 
                     {
                         let winner = `DRAW`; 
+                        info.innerHTML = winner; 
                         console.log(winner);
-                    };
-                
+                    } else {
+                        let winner = `Game in progress...`; 
+                        info.innerHTML = winner; 
+                    };                
             };
 
         gameOverCheck();

@@ -37,6 +37,9 @@ function Gameboard() {
         board = [['', '', ''], ['', '', ''], ['', '', '']]; 
         printBoard(); 
         info.innerHTML = ''; 
+        buttons.forEach(button => {
+            button.disabled = false; 
+        }); 
     };
 
     return { 
@@ -106,15 +109,22 @@ function Move() {
                 )   {
                         let winner = `${input} WINS`; 
                         info.innerHTML = winner; 
+                        buttons.forEach(button => {
+                            button.disabled = true; 
+                        }); 
                     } 
                 else if (((board.getBoard()[0].includes('')) === false) && ((board.getBoard()[1].includes('')) === false) && ((board.getBoard()[2].includes('')) === false)) 
                     {
                         let winner = `DRAW`; 
                         info.innerHTML = winner; 
+                        buttons.forEach(button => {
+                            button.disabled = true; 
+                        }); 
                     } 
                 else {
                         let winner = `Game in progress...`; 
                         info.innerHTML = winner; 
+                        buttons.disabled = false; 
                     };                
             };
 

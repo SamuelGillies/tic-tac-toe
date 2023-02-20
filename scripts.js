@@ -11,6 +11,7 @@ let button6 = document.getElementById('5');
 let button7 = document.getElementById('6'); 
 let button8 = document.getElementById('7'); 
 let button9 = document.getElementById('8'); 
+let info = document.getElementById('info');
 
 function Gameboard() {
 
@@ -99,11 +100,14 @@ function Move() {
                 ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[2][2] === `${input}`)) || 
                 ((board.getBoard()[0][2] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[2][0] === `${input}`))
                 )   {
-                    console.log(`${input} WINS`); 
+                    let winner = `${input} WINS`; 
+                    info.innerHTML = winner; 
+                    console.log(winner); 
                     } 
                 else if (((board.getBoard()[0].includes('')) === false) && ((board.getBoard()[1].includes('')) === false) && ((board.getBoard()[2].includes('')) === false)) 
                     {
-                        console.log(`DRAW`);
+                        let winner = `DRAW`; 
+                        console.log(winner);
                     };
                 
             };

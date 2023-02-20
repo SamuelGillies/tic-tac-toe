@@ -13,6 +13,17 @@
   justify-content: center;
 }
 
+.information {
+  height: 15vh; 
+  display: flex; 
+  align-items: center;
+  justify-content: center;
+}
+
+.information--declaration {
+  font-size: 2rem;
+}
+
 .container {
   display: flex; 
   align-items: center;

@@ -89,15 +89,16 @@ function Move() {
 
     const GameOver = (input) => {
         const gameOverCheck = () => {
-            if ((((board.getBoard()[0][0]) && (board.getBoard()[1][0]) && (board.getBoard()[2][0])) ||
-                ((board.getBoard()[0][1]) && (board.getBoard()[1][1]) && (board.getBoard()[2][1])) || 
-                ((board.getBoard()[0][2]) && (board.getBoard()[1][2]) && (board.getBoard()[2][2])) || 
-                ((board.getBoard()[0][0]) && (board.getBoard()[0][1]) && (board.getBoard()[0][2])) || 
-                ((board.getBoard()[1][0]) && (board.getBoard()[1][1]) && (board.getBoard()[1][2])) || 
-                ((board.getBoard()[2][0]) && (board.getBoard()[2][1]) && (board.getBoard()[2][2])) || 
-                ((board.getBoard()[0][0]) && (board.getBoard()[1][1]) && (board.getBoard()[2][2])) || 
-                ((board.getBoard()[0][2]) && (board.getBoard()[1][1]) && (board.getBoard()[2][0]))) 
-            == input) {
+            if (
+                ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[1][0] === `${input}`) && (board.getBoard()[2][0] === `${input}`)) ||
+                ((board.getBoard()[0][1] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[2][1] === `${input}`)) || 
+                ((board.getBoard()[0][2] === `${input}`) && (board.getBoard()[1][2] === `${input}`) && (board.getBoard()[2][2] === `${input}`)) || 
+                ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[0][1] === `${input}`) && (board.getBoard()[0][2] === `${input}`)) || 
+                ((board.getBoard()[1][0] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[1][2] === `${input}`)) || 
+                ((board.getBoard()[2][0] === `${input}`) && (board.getBoard()[2][1] === `${input}`) && (board.getBoard()[2][2] === `${input}`)) || 
+                ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[2][2] === `${input}`)) || 
+                ((board.getBoard()[0][2] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[2][0] === `${input}`))
+                ) {
                     console.log(`${input} WINS`); 
                 } 
             };

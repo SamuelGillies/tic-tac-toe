@@ -83,11 +83,6 @@ function Controller(name1, name2) {
         board.printBoard(); 
     }
 
-     
-        
-
-
-
     return { switchPlayer, getActivePlayer, resetPlayer, printNewRound }
 }
 
@@ -201,6 +196,7 @@ function Move() {
         reset.addEventListener('click', () => {
             board.resetBoard(); 
             controller.resetPlayer();
+            info.innerHTML = 'Click to start game';
         }); 
     }
    

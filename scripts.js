@@ -83,8 +83,14 @@ function Controller(name1, name2) {
         board.printBoard(); 
     }
 
+     
+        
+
+
+
     return { switchPlayer, getActivePlayer, resetPlayer, printNewRound }
 }
+
 
 function Move() {
 
@@ -92,7 +98,7 @@ function Move() {
     const controller = Controller('Player 1', 'Player 2'); 
 
     const updateGameState = (row, col, symbol) => {
-        if ( board.getBoard()[row][col] == '') {
+        if (board.getBoard()[row][col] == '') {
             board.getBoard()[row][col] = symbol; 
         } else if ((board.getBoard()[row][col] == 'X')||(board.getBoard()[row][col] == 'O')){
             board.getBoard()[row][col] == board.getBoard()[row][col];
@@ -102,14 +108,22 @@ function Move() {
     const GameOver = (input) => {
         const gameOverCheck = () => {
             if (
-                ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[1][0] === `${input}`) && (board.getBoard()[2][0] === `${input}`)) ||
-                ((board.getBoard()[0][1] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[2][1] === `${input}`)) || 
-                ((board.getBoard()[0][2] === `${input}`) && (board.getBoard()[1][2] === `${input}`) && (board.getBoard()[2][2] === `${input}`)) || 
-                ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[0][1] === `${input}`) && (board.getBoard()[0][2] === `${input}`)) || 
-                ((board.getBoard()[1][0] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[1][2] === `${input}`)) || 
-                ((board.getBoard()[2][0] === `${input}`) && (board.getBoard()[2][1] === `${input}`) && (board.getBoard()[2][2] === `${input}`)) || 
-                ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[2][2] === `${input}`)) || 
-                ((board.getBoard()[0][2] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && (board.getBoard()[2][0] === `${input}`))
+                ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[1][0] === `${input}`) && 
+                    (board.getBoard()[2][0] === `${input}`)) ||
+                ((board.getBoard()[0][1] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && 
+                    (board.getBoard()[2][1] === `${input}`)) || 
+                ((board.getBoard()[0][2] === `${input}`) && (board.getBoard()[1][2] === `${input}`) && 
+                    (board.getBoard()[2][2] === `${input}`)) || 
+                ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[0][1] === `${input}`) && 
+                    (board.getBoard()[0][2] === `${input}`)) || 
+                ((board.getBoard()[1][0] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && 
+                    (board.getBoard()[1][2] === `${input}`)) || 
+                ((board.getBoard()[2][0] === `${input}`) && (board.getBoard()[2][1] === `${input}`) && 
+                    (board.getBoard()[2][2] === `${input}`)) || 
+                ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && 
+                    (board.getBoard()[2][2] === `${input}`)) || 
+                ((board.getBoard()[0][2] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && 
+                    (board.getBoard()[2][0] === `${input}`))
                 )   {
                         let winner = `${input} WINS`; 
                         info.innerHTML = winner; 
@@ -117,7 +131,8 @@ function Move() {
                             button.disabled = true; 
                         });      
                     } 
-                else if (((board.getBoard()[0].includes('')) === false) && ((board.getBoard()[1].includes('')) === false) && ((board.getBoard()[2].includes('')) === false)) 
+                else if (((board.getBoard()[0].includes('')) === false) && ((board.getBoard()[1].includes('')) === false) 
+                    && ((board.getBoard()[2].includes('')) === false)) 
                     {
                         let winner = `DRAW`; 
                         info.innerHTML = winner; 
@@ -135,6 +150,27 @@ function Move() {
         gameOverCheck();
     }
 
+    const aiMove = () => {
+        let aiRow = 0; 
+        let aiCol = 0; 
+        let isValid = true; 
+
+        for (let i = 0; i < 9; i++) {
+            aiRow = Math.floor(Math.random() * 3); 
+            aiCol = Math.floor(Math.random() * 3); 
+
+            if (board.getBoard()[aiRow][aiCol] === '') {
+                isValid = true; 
+                break; 
+            }
+        }
+
+        if (isValid) {
+            board.getBoard()[aiRow][aiCol] = 'O';
+            controller.switchPlayer(); 
+        }
+    };
+
     const userInput = () => {
         buttons.forEach(button => {
             let row = button.dataset.row; 
@@ -143,6 +179,8 @@ function Move() {
             button.addEventListener('click', () => {
                 let symbol = controller.getActivePlayer().symbol; 
                 updateGameState(row, col, symbol); 
+                GameOver(symbol); 
+                aiMove();                
                 board.printBoard();
                 GameOver(symbol); 
                 controller.switchPlayer(); 

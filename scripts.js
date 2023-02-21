@@ -105,8 +105,11 @@ function Move() {
         }
     }
 
+    let gameOver = false; 
+
     const GameOver = (input) => {
         const gameOverCheck = () => {
+
             if (
                 ((board.getBoard()[0][0] === `${input}`) && (board.getBoard()[1][0] === `${input}`) && 
                     (board.getBoard()[2][0] === `${input}`)) ||
@@ -125,25 +128,28 @@ function Move() {
                 ((board.getBoard()[0][2] === `${input}`) && (board.getBoard()[1][1] === `${input}`) && 
                     (board.getBoard()[2][0] === `${input}`))
                 )   {
-                        let winner = `${input} WINS`; 
-                        info.innerHTML = winner; 
                         buttons.forEach(button => {
                             button.disabled = true; 
-                        });      
+                        });     
+                        let winner = `${input} WINS`; 
+                        info.innerHTML = winner; 
+                        gameOver = true;                                               
                     } 
                 else if (((board.getBoard()[0].includes('')) === false) && ((board.getBoard()[1].includes('')) === false) 
                     && ((board.getBoard()[2].includes('')) === false)) 
                     {
-                        let winner = `DRAW`; 
-                        info.innerHTML = winner; 
                         buttons.forEach(button => {
                             button.disabled = true; 
-                        }); 
+                        });
+                        let winner = `DRAW`; 
+                        info.innerHTML = winner; 
+                        gameOver = true;                  
                     } 
                 else {
+                        buttons.disabled = false;     
                         let winner = `Game in progress...`; 
-                        info.innerHTML = winner; 
-                        buttons.disabled = false; 
+                        info.innerHTML = winner;    
+                        gameOver = false;                  
                     };
             };
 
@@ -180,10 +186,13 @@ function Move() {
                 let symbol = controller.getActivePlayer().symbol; 
                 updateGameState(row, col, symbol); 
                 GameOver(symbol); 
-                aiMove();                
                 board.printBoard();
-                GameOver(symbol); 
                 controller.switchPlayer(); 
+                if (gameOver === false) {
+                    aiMove();
+                    GameOver('O');           
+                };     
+                board.printBoard();
             });
         });
     };

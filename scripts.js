@@ -39,7 +39,7 @@ function Gameboard() {
         info.innerHTML = ''; 
         buttons.forEach(button => {
             button.disabled = false; 
-        }); 
+        });
     };
 
     return { 
@@ -75,11 +75,15 @@ function Controller(name1, name2) {
 
     const getActivePlayer = () => activePlayer; 
 
+    const resetPlayer = () => {
+        activePlayer = players[0];
+    }
+
     const printNewRound = () => {
         board.printBoard(); 
     }
 
-    return { switchPlayer, getActivePlayer, printNewRound }
+    return { switchPlayer, getActivePlayer, resetPlayer, printNewRound }
 }
 
 function Move() {
@@ -111,7 +115,7 @@ function Move() {
                         info.innerHTML = winner; 
                         buttons.forEach(button => {
                             button.disabled = true; 
-                        }); 
+                        });      
                     } 
                 else if (((board.getBoard()[0].includes('')) === false) && ((board.getBoard()[1].includes('')) === false) && ((board.getBoard()[2].includes('')) === false)) 
                     {
@@ -125,7 +129,7 @@ function Move() {
                         let winner = `Game in progress...`; 
                         info.innerHTML = winner; 
                         buttons.disabled = false; 
-                    };                
+                    };
             };
 
         gameOverCheck();
@@ -149,6 +153,7 @@ function Move() {
     const userReset = () => {
         reset.addEventListener('click', () => {
             board.resetBoard(); 
+            controller.resetPlayer();
         }); 
     }
    
